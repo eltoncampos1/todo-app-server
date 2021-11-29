@@ -1,4 +1,4 @@
-import { ICreateTodoDTO } from "../DTOs";
+import { ICreateTodoDTO, IUpdateTodoDTO } from "../DTOs";
 import { Todo } from "models/Todo"
 
 
@@ -6,6 +6,7 @@ import { Todo } from "models/Todo"
 interface ITodoRepository {
     create(data: ICreateTodoDTO): Todo
     list(): Todo[]
+    update(data: IUpdateTodoDTO): Todo
 }
 
 export { ITodoRepository }
