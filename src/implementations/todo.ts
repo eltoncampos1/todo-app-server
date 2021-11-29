@@ -24,6 +24,10 @@ class TodoRepository implements ITodoRepository {
 
         return todo
     }
+    list():Todo[] {
+        return this.repository
+    }
+
 }
 
 export { TodoRepository }
