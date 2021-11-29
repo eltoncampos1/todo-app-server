@@ -1,6 +1,6 @@
-import { ICreateTodoDTO } from "@DTOs/ICreateTodoDTO";
-import { Todo } from "@models/Todo";
-import { ITodoRepository } from "src/repositories/TodosRepositories";
+import { ICreateTodoDTO } from "DTOs/create-todo";
+import { Todo } from "models/Todo";
+import { ITodoRepository } from "src/repositories/todo";
 
 
 class TodoRepository implements ITodoRepository {
@@ -10,13 +10,13 @@ class TodoRepository implements ITodoRepository {
         this.repository = []
     }
 
-    create({content,isComplete, created_at}: ICreateTodoDTO): Todo {
+    create({content, isComplete }: ICreateTodoDTO): Todo {
 
         const todo = new Todo()
 
         Object.assign(todo, {
             content,
-            isComplete: false,
+            isComplete,
             created_at: new Date()
         })
 

@@ -1,5 +1,5 @@
 import { ICreateTodoDTO } from "../DTOs";
-import { Todo } from "@models/Todo"
+import { Todo } from "models/Todo"
 
 
 
