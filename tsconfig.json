@@ -22,7 +22,8 @@
       "repositories/*": ["./src/utils/*"],
       "implementations/*": ["./src/implementations/*"],
       "use-cases/*": ["./src/use-cases/*"],
-      "routes/*":["./src/routes/*"]
+      "routes/*":["./src/routes/*"],
+      "errors/*": ["./src/errors/*"]
     }
   }
 }
