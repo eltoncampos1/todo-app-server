@@ -1,20 +1,18 @@
 import { ICreateTodoDTO } from "DTOs/create-todo";
-import { TodoRepository } from "implementations/todo";
-import { Todo } from "src/entities/Todo";
 import { ITodoRepository } from "src/repositories/todo";
 
 
 class CreateTodoUseCase {
     constructor(private todoRepository: ITodoRepository){}
 
-    execute({content, isComplete }: ICreateTodoDTO): Todo {
+    async execute({content, isComplete }: ICreateTodoDTO): Promise<void> {
+
         if(!content) {
             throw new Error()
         }
 
-        const todo = this.todoRepository.create({ content, isComplete })
+      await this.todoRepository.create({ content, isComplete })
 
-        return todo
     }
 }
 

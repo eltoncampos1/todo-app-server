@@ -4,8 +4,8 @@ import { Todo } from "src/entities/Todo";
 class ListTodoUseCase {
     constructor(private todosRepository: TodoRepository){}
 
-    execute():Todo[] {
-        return this.todosRepository.list()
+    async execute():Promise<Todo[]> {
+        return await this.todosRepository.list()
     }
 }
 

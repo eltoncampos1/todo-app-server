@@ -5,14 +5,8 @@ import { Todo } from "src/entities/Todo";
 class UpdateTodoUseCase {
     constructor(private todoRepository: TodoRepository){}
 
-    execute({ todoId,content,isComplete }:IUpdateTodoDTO): Todo | undefined {
-        const todo = this.todoRepository.update({todoId, content, isComplete})
-
-        if(!todo)   {
-            throw new Error()
-        } 
-
-        return todo
+    async execute({ todoId,content,isComplete }:IUpdateTodoDTO): Promise<void> {
+       await this.todoRepository.update({todoId, content, isComplete})
     }   
 }
 

@@ -6,15 +6,15 @@ class UpdateTodoController {
     constructor(private updateTodoUseCase: UpdateTodoUseCase){}
 
 
-    handle(request: Request, response: Response): Response {
+    async handle(request: Request, response: Response): Promise<Response> {
         const {todoId} = request.params;
 
         const {content, isComplete} = request.body
 
         try {
-            const todo = this.updateTodoUseCase.execute({content, isComplete, todoId })
+           await this.updateTodoUseCase.execute({content, isComplete, todoId })
     
-            return response.status(200).json(todo)
+            return response.status(200).send()
         } catch (error) {
             throw new AppError("This todo does not exists")
         }

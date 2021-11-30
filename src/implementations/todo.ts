@@ -3,42 +3,53 @@ import { IDeleteTodoDTO } from "DTOs/delete-todo";
 import { IUpdateTodoDTO } from "DTOs/update-todo";
 import { Todo } from "src/entities/Todo";
 import { ITodoRepository } from "src/repositories/todo";
+import { getRepository, Repository } from "typeorm";
 
 
 class TodoRepository implements ITodoRepository {
-    private repository: Todo[]
+   private repository: Repository<Todo> 
+
+
+   private static INSTACE: TodoRepository
 
     constructor() {
-        this.repository = []
+        this.repository = getRepository(Todo)
+    }
+
+
+    public static getInstance(): TodoRepository {
+        if(!TodoRepository.INSTACE) {
+            TodoRepository.INSTACE = new TodoRepository()
+        }
+
+        return TodoRepository.INSTACE
     }
    
-    list():Todo[] {
-        return this.repository
+    async list():Promise<Todo[]> {
+       const todos = await this.repository.find()
+
+       return todos
     }
     
-    create({content, isComplete }: ICreateTodoDTO): Todo {
+    async create({content, isComplete }: ICreateTodoDTO): Promise<void> {
 
-        const todo = new Todo()
-
-        Object.assign(todo, {
+        const todo = await this.repository.create({
             content,
-            isComplete: false,
-            created_at: new Date()
+            isComplete: false
         })
 
-        this.repository.push(todo)
+        await this.repository.save(todo)
 
-        return todo
     }
 
-    findById(id:string): Todo | undefined {
-        const todo = this.repository.find(todo => todo.id === id )
+    async findById(id:string): Promise<Todo | undefined> {
+        const todo = await this.repository.findOne({ id })
 
         return todo
     }  
 
-    update({todoId, content, isComplete}: IUpdateTodoDTO):Todo | undefined{
-        const todo = this.findById(todoId as string)
+    async update({todoId, content, isComplete}: IUpdateTodoDTO):Promise<void>{
+        const todo = await this.findById(todoId as string)
 
         if(todo) {
             todo.updated_at = new Date()
@@ -49,18 +60,16 @@ class TodoRepository implements ITodoRepository {
             if(isComplete) {
                 todo.isComplete = isComplete 
             }
-
-            return todo
         }
 
         return
     }
 
-    delete({todoId}: IDeleteTodoDTO): void {
-        const todoIdx = this.repository.findIndex(todo => todo.id === todoId)
+    async delete({todoId}: IDeleteTodoDTO): Promise<void> {
+        const todo = await this.findById(todoId)
 
-        if(todoIdx !== -1) {
-            this.repository.splice(todoIdx, 1)
+        if(todo) {
+            this.repository.softDelete(todo)
         } else {
             throw new Error()
         }

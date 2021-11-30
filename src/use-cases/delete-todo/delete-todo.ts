@@ -4,8 +4,8 @@ import { TodoRepository } from "implementations/todo";
 class DeleteTodoUseCase {
     constructor(private todoRepository: TodoRepository){}
 
-    execute({ todoId }:IDeleteTodoDTO): void {
-        this.todoRepository.delete({ todoId })
+    async execute({ todoId }:IDeleteTodoDTO): Promise<void> {
+        await this.todoRepository.delete({ todoId })
     }
 }
 

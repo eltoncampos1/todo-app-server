@@ -6,12 +6,12 @@ class DeleteTodoController {
 
     constructor(private deleteTodoUseCase: DeleteTodoUseCase){}
 
-    handle(request:Request, response: Response): Response {
+    async handle(request:Request, response: Response): Promise<Response> {
         const { todoId } = request.params;
 
         try {    
     
-            this.deleteTodoUseCase.execute({ todoId })
+            await this.deleteTodoUseCase.execute({ todoId })
     
             return response.status(200).send()
         } catch (error) {

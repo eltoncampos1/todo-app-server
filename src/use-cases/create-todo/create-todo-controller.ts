@@ -6,15 +6,15 @@ import { CreateTodoUseCase } from './create-todo';
 class CreateTodoController {
     constructor(private createTodoUseCase: CreateTodoUseCase){}
 
-    handle(request: Request, response: Response): Response {
+    async handle(request: Request, response: Response): Promise<Response> {
         
         const { content, isComplete } = request.body
         try {
-            const todo =  this.createTodoUseCase.execute({
+            await this.createTodoUseCase.execute({
                 content,
                 isComplete
             })
-            return response.status(201).json(todo)
+            return response.status(201).send()
         } catch (error) {
             throw new AppError("Cannot create a new Todo")
         }
