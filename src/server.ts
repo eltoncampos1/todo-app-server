@@ -1,8 +1,13 @@
+import 'reflect-metadata'
+
 import { AppError } from "errors/AppError";
 import express, {Request, Response, NextFunction} from "express";
 import { todoRoutes } from "./routes";
+import  './database'
 
 const app = express();
+
+
 app.use(express.json())
 app.use(todoRoutes)
 
