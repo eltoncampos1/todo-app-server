@@ -1,6 +1,7 @@
 import { AppError } from "errors/AppError";
 import { Request, Response } from "express";
-import { DeleteTodoUseCase } from ".";
+import { DeleteTodoUseCase } from "./delete-todo";
+
 
 class DeleteTodoController {
 

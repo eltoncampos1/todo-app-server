@@ -9,20 +9,8 @@ import { getRepository, Repository } from "typeorm";
 class TodoRepository implements ITodoRepository {
    private repository: Repository<Todo> 
 
-
-   private static INSTACE: TodoRepository
-
     constructor() {
         this.repository = getRepository(Todo)
-    }
-
-
-    public static getInstance(): TodoRepository {
-        if(!TodoRepository.INSTACE) {
-            TodoRepository.INSTACE = new TodoRepository()
-        }
-
-        return TodoRepository.INSTACE
     }
    
     async list():Promise<Todo[]> {
@@ -31,9 +19,10 @@ class TodoRepository implements ITodoRepository {
        return todos
     }
     
-    async create({content, isComplete }: ICreateTodoDTO): Promise<void> {
+    async create({ id ,content, isComplete }: ICreateTodoDTO): Promise<void> {
 
-        const todo = await this.repository.create({
+        const todo = this.repository.create({
+            id,
             content,
             isComplete: false
         })
@@ -49,8 +38,8 @@ class TodoRepository implements ITodoRepository {
     }  
 
     async update({todoId, content, isComplete}: IUpdateTodoDTO):Promise<void>{
-        const todo = await this.findById(todoId as string)
-
+        const todo = await this.repository.findOne({id: todoId})
+        
         if(todo) {
             todo.updated_at = new Date()
             if(content) {
@@ -60,16 +49,17 @@ class TodoRepository implements ITodoRepository {
             if(isComplete) {
                 todo.isComplete = isComplete 
             }
+
+            await this.repository.update({id: todo.id}, {content: todo.content, isComplete: todo.isComplete})
         }
 
-        return
     }
 
     async delete({todoId}: IDeleteTodoDTO): Promise<void> {
-        const todo = await this.findById(todoId)
+        const todo = await this.repository.findOne({id: todoId})
 
         if(todo) {
-            this.repository.softDelete(todo)
+            await this.repository.delete({id: todo.id})
         } else {
             throw new Error()
         }

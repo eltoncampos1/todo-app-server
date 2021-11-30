@@ -1,6 +1,7 @@
 import { AppError } from "errors/AppError";
 import { Request, Response } from "express";
-import { UpdateTodoUseCase } from ".";
+import { UpdateTodoUseCase } from "./update-todo";
+
 
 class UpdateTodoController {
     constructor(private updateTodoUseCase: UpdateTodoUseCase){}
@@ -11,14 +12,10 @@ class UpdateTodoController {
 
         const {content, isComplete} = request.body
 
-        try {
            await this.updateTodoUseCase.execute({content, isComplete, todoId })
     
             return response.status(200).send()
-        } catch (error) {
-            throw new AppError("This todo does not exists")
-        }
-
+     
     }
 }
 

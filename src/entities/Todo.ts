@@ -1,10 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryColumn,  UpdateDateColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid'
 
 @Entity('todos')
 class Todo {
 
-  @PrimaryGeneratedColumn()
+  @PrimaryColumn()
   id?: string;
 
   @Column()
