@@ -1,27 +1,15 @@
 import { IUpdateTodoDTO } from "DTOs/update-todo";
 import { TodoRepository } from "implementations/todo";
+import { Todo } from "models/Todo";
 
 class UpdateTodoUseCase {
     constructor(private todoRepository: TodoRepository){}
 
-    execute({ todoId,content,isComplete }:IUpdateTodoDTO) {
-        const todo = this.todoRepository.findById(todoId as string)
+    execute({ todoId,content,isComplete }:IUpdateTodoDTO): Todo | undefined {
+        const todo = this.todoRepository.update({todoId, content, isComplete})
 
-        if(todo) {
-
-            if(content) {
-                todo.content = content as string
-            }
-
-            if(isComplete) {
-                todo.isComplete = isComplete 
-            }
-
-            return todo
-        }
-
-        return
-    }
+        if(todo) return todo 
+    }   
 }
 
 export { UpdateTodoUseCase }

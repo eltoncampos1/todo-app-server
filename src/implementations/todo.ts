@@ -34,7 +34,28 @@ class TodoRepository implements ITodoRepository {
         const todo = this.repository.find(todo => todo.id === id )
 
         return todo
-    }    
+    }  
+
+    update({todoId, content, isComplete}: IUpdateTodoDTO):Todo | undefined{
+        const todo = this.findById(todoId as string)
+
+        if(todo) {
+
+            if(content) {
+                todo.content = content as string
+            }
+
+            if(isComplete) {
+                todo.isComplete = isComplete 
+            }
+
+            return todo
+        }
+
+        return
+    }
+    
+ 
 }
 
 export { TodoRepository }
