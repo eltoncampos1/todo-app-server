@@ -1,3 +1,4 @@
+import { AppError } from "errors/AppError";
 import { Request, Response } from "express";
 import { DeleteTodoUseCase } from ".";
 
@@ -8,9 +9,15 @@ class DeleteTodoController {
     handle(request:Request, response: Response): Response {
         const { todoId } = request.params;
 
-        this.deleteTodoUseCase.execute({ todoId })
+        try {    
+    
+            this.deleteTodoUseCase.execute({ todoId })
+    
+            return response.status(200).send()
+        } catch (error) {
+            throw new AppError("This todo does not exists")
+        }
 
-        return response.status(200).send()
     }
 }
 

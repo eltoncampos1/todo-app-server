@@ -59,7 +59,12 @@ class TodoRepository implements ITodoRepository {
     delete({todoId}: IDeleteTodoDTO): void {
         const todoIdx = this.repository.findIndex(todo => todo.id === todoId)
 
-       this.repository.splice(todoIdx, 1)
+        if(todoIdx !== -1) {
+            this.repository.splice(todoIdx, 1)
+        } else {
+            throw new Error()
+        }
+
     }
     
 }
