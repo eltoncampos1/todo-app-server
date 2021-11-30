@@ -1,6 +1,6 @@
 import { IUpdateTodoDTO } from "DTOs/update-todo";
 import { TodoRepository } from "implementations/todo";
-import { Todo } from "models/Todo";
+import { Todo } from "src/entities/Todo";
 
 class UpdateTodoUseCase {
     constructor(private todoRepository: TodoRepository){}

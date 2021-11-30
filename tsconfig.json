@@ -15,7 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "controllers/*": ["./src/controllers/*"],
-      "models/*": ["./src/models/*"],
+      "models/*": ["src/entities/*"],
       "config/*": ["./src/config/*"],
       "utils/*": ["./src/utils/*"],
       "DTOs/*":["./src/DTOs/*"],

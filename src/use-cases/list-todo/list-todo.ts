@@ -1,5 +1,5 @@
 import { TodoRepository } from "implementations/todo";
-import { Todo } from "models/Todo";
+import { Todo } from "src/entities/Todo";
 
 class ListTodoUseCase {
     constructor(private todosRepository: TodoRepository){}

@@ -1,5 +1,5 @@
 import { ICreateTodoDTO, IDeleteTodoDTO, IUpdateTodoDTO } from "../DTOs";
-import { Todo } from "models/Todo"
+import { Todo } from "src/entities/Todo"
 
 
 

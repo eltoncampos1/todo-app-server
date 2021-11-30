@@ -1,7 +1,7 @@
 import { ICreateTodoDTO } from "DTOs/create-todo";
 import { IDeleteTodoDTO } from "DTOs/delete-todo";
 import { IUpdateTodoDTO } from "DTOs/update-todo";
-import { Todo } from "models/Todo";
+import { Todo } from "src/entities/Todo";
 import { ITodoRepository } from "src/repositories/todo";
 
 
@@ -41,7 +41,7 @@ class TodoRepository implements ITodoRepository {
         const todo = this.findById(todoId as string)
 
         if(todo) {
-
+            todo.updated_at = new Date()
             if(content) {
                 todo.content = content as string
             }

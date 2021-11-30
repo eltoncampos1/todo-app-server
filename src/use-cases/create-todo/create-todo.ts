@@ -1,6 +1,6 @@
 import { ICreateTodoDTO } from "DTOs/create-todo";
 import { TodoRepository } from "implementations/todo";
-import { Todo } from "models/Todo";
+import { Todo } from "src/entities/Todo";
 import { ITodoRepository } from "src/repositories/todo";
 
 

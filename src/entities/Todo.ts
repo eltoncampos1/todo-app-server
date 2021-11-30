@@ -1,10 +1,22 @@
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { v4 as uuid } from 'uuid'
 
+@Entity('todos')
 class Todo {
+
+  @PrimaryGeneratedColumn()
   id?: string;
+
+  @Column()
   content: string;
+
+  @Column()
   isComplete: boolean;
+
+  @CreateDateColumn()
   created_at: Date;
+
+  @UpdateDateColumn()
   updated_at?: Date;
 
 
