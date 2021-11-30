@@ -22,7 +22,7 @@ class TodoRepository implements ITodoRepository {
 
         Object.assign(todo, {
             content,
-            isComplete,
+            isComplete: false,
             created_at: new Date()
         })
 

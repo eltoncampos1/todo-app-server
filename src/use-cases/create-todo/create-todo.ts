@@ -8,6 +8,10 @@ class CreateTodoUseCase {
     constructor(private todoRepository: ITodoRepository){}
 
     execute({content, isComplete }: ICreateTodoDTO): Todo {
+        if(!content) {
+            throw new Error()
+        }
+
         const todo = this.todoRepository.create({ content, isComplete })
 
         return todo
