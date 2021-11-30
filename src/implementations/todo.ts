@@ -1,4 +1,5 @@
 import { ICreateTodoDTO } from "DTOs/create-todo";
+import { IDeleteTodoDTO } from "DTOs/delete-todo";
 import { IUpdateTodoDTO } from "DTOs/update-todo";
 import { Todo } from "models/Todo";
 import { ITodoRepository } from "src/repositories/todo";
@@ -54,8 +55,13 @@ class TodoRepository implements ITodoRepository {
 
         return
     }
+
+    delete({todoId}: IDeleteTodoDTO): void {
+        const todoIdx = this.repository.findIndex(todo => todo.id === todoId)
+
+       this.repository.splice(todoIdx, 1)
+    }
     
- 
 }
 
 export { TodoRepository }
