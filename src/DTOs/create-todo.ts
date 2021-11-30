@@ -4,9 +4,4 @@ interface ICreateTodoDTO {
   isComplete: boolean;
 }
 
-interface IUpdateTodoDTO {
-  content: string;
-  isComplete: boolean;
-}
-
 export { ICreateTodoDTO }
