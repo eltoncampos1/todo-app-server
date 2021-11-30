@@ -8,7 +8,11 @@ class UpdateTodoUseCase {
     execute({ todoId,content,isComplete }:IUpdateTodoDTO): Todo | undefined {
         const todo = this.todoRepository.update({todoId, content, isComplete})
 
-        if(todo) return todo 
+        if(!todo)   {
+            throw new Error()
+        } 
+
+        return todo
     }   
 }
 

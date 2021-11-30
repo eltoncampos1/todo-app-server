@@ -1,3 +1,4 @@
+import { AppError } from "errors/AppError";
 import { Request, Response } from "express";
 import { UpdateTodoUseCase } from ".";
 
@@ -10,9 +11,14 @@ class UpdateTodoController {
 
         const {content, isComplete} = request.body
 
-        const todo = this.updateTodoUseCase.execute({content, isComplete, todoId })
+        try {
+            const todo = this.updateTodoUseCase.execute({content, isComplete, todoId })
+    
+            return response.status(200).json(todo)
+        } catch (error) {
+            throw new AppError("This todo does not exists")
+        }
 
-        return response.status(200).json(todo)
     }
 }
 
