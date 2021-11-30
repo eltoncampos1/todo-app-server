@@ -1,16 +1,18 @@
-import { AppError } from 'errors/AppError';
 import { Request, Response} from 'express'
-import { CreateTodoUseCase } from './create-todo';
+import {container} from 'tsyringe'
+import { CreateTodoUseCase } from './create-todo'
 
 
 class CreateTodoController {
-    constructor(private createTodoUseCase: CreateTodoUseCase){}
+  
 
     async handle(request: Request, response: Response): Promise<Response> {
         
         const { content, isComplete } = request.body
 
-        await this.createTodoUseCase.execute({
+        const createTodoUseCase = container.resolve(CreateTodoUseCase)
+
+        await createTodoUseCase.execute({
             content,
             isComplete
         })

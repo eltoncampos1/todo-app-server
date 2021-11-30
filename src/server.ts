@@ -4,7 +4,7 @@ import { AppError } from "errors/AppError";
 import express, {Request, Response, NextFunction} from "express";
 import { todoRoutes } from "./routes";
 import  './database'
-
+import 'shared/container'
 const app = express();
 
 

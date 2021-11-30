@@ -23,7 +23,8 @@
       "implementations/*": ["./src/implementations/*"],
       "use-cases/*": ["./src/use-cases/*"],
       "routes/*":["./src/routes/*"],
-      "errors/*": ["./src/errors/*"]
+      "errors/*": ["./src/errors/*"],
+      "shared/*": ["./src/shared/*"]
     }
   }
 }
