@@ -1,5 +1,5 @@
 import 'reflect-metadata'
-
+import 'express-async-errors'
 import { AppError } from "errors/AppError";
 import express, {Request, Response, NextFunction} from "express";
 import { todoRoutes } from "./routes";
