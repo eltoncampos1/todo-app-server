@@ -1,5 +1,6 @@
 interface IUpdateTodoDTO {
-  content: string;
+  todoId?: string | undefined;
+  content?: string;
   isComplete: boolean;
 }
 
